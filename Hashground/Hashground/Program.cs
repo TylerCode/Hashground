@@ -45,7 +45,17 @@ namespace Hashground
 
         private static string DecryptText(string privateKey, string fileName)
         {
-            return "";
+            byte[] dataToDecrypt = File.ReadAllBytes(fileName);
+ 
+            byte[] decryptedData;
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(privateKey);
+                decryptedData = rsa.Decrypt(dataToDecrypt, false);
+            }
+  
+            UnicodeEncoding byteConverter = new UnicodeEncoding();
+            return byteConverter.GetString(decryptedData);
         }
     }
 }
