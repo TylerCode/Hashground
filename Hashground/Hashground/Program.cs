@@ -19,7 +19,7 @@ namespace Hashground
             string privKey = rsa.ToXmlString(true); //True give private key
 
             EncryptText(pubKey, shipment.Encode(), "shipment.dat");
-            File.WriteAllText("test.txt", shipment.Encode());
+            File.WriteAllText("shipment.txt", shipment.Encode());
 
             Console.WriteLine("Decrypted Message: {0}", DecryptText(privKey, "shipment.dat"));
         }
