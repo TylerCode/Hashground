@@ -20,7 +20,21 @@ namespace Hashground
 
         private static void EncryptText(string publicKey, string text, string fileName)
         {
+            UnicodeEncoding byteConversion = new UnicodeEncoding();
+            byte[] dataToEncrypt = byteConversion.GetBytes(text);
 
+            byte[] encryptedData;
+
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+            {
+                rsa.FromXmlString(publicKey);
+
+                encryptedData = rsa.Encrypt(dataToEncrypt, false);
+            }
+
+            File.WriteAllBytes(fileName, encryptedData);
+
+            Console.WriteLine("data encrypted");
         }
 
         private static string DecryptText(string privateKey, string fileName)
