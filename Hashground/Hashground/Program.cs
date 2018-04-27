@@ -13,7 +13,7 @@ namespace Hashground
             string pubKey = rsa.ToXmlString(false); //False gives pub key
             string privKey = rsa.ToXmlString(true); //True give private key
 
-            EncryptText(pubKey, "One day they'll have secrets. One day they'll have dreams.", "irobot.dat");
+            EncryptText(pubKey, "", "irobot.dat");
 
             Console.WriteLine("Decrypted Message: {0}", DecryptText(privKey, "irobot.dat"));
         }
